@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ganadros · Blog independiente sobre pensiones y jubilación</title>
+<meta name="description" content="Blog educativo independiente sobre pensiones: sistema público, planes privados y de empleo, cuánto necesitarás para jubilarte y por qué empezar pronto.">
+<link rel="canonical" href="https://ganadros.blog/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23D2381C'/%3E%3Ccircle cx='0' cy='40' r='26' fill='%23141414'/%3E%3Crect x='24' y='6' width='10' height='10' fill='%23F4F1EA'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&amp;family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ganadros · hoja de estilos
+   Dirección nº 11 — Cartel suizo / estilo tipográfico internacional
+   Paleta propia: blanco roto, rojo bermellón, negro tinta, gris cálido
+   Tipografía: Schibsted Grotesk (titulares, interfaz) + Crimson Pro (lectura)
+   ========================================================= */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --papel:#F4F1EA;
+  --tinta:#141414;
+  --rojo:#D2381C;          /* bermellón: bloques y números (texto blanco encima: 4,8:1) */
+  --rojo-texto:#A82C16;    /* bermellón oscuro para texto sobre papel (≥5,8:1) */
+  --gris:#B3AB9E;          /* gris cálido decorativo */
+  --gris-claro:#E3DDD1;    /* gris cálido de fondo */
+  --gris-texto:#55504A;    /* gris cálido para texto pequeño (≥7:1) */
+  --blanco:#FFFFFF;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Crimson Pro",Georgia,"Times New Roman",serif;
+  --ancho:1240px;
+  --gut:clamp(16px,3vw,32px);
+  --filete:8px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--papel);color:var(--tinta);font-family:var(--sans);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-underline-offset:.18em;text-decoration-thickness:2px}
+a:hover{color:var(--rojo-texto)}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+.wrap{max-width:var(--ancho);margin:0 auto;padding:0 var(--gut)}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut)}
+.saltar{position:absolute;left:-9999px;top:0}
+.saltar:focus{left:16px;top:16px;background:var(--tinta);color:var(--papel);padding:.6rem 1rem;z-index:20}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.etq{font-family:var(--sans);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+
+/* ---------- Exención superior (solo inicio) ---------- */
+.exencion-top{background:var(--tinta);color:var(--papel);font-size:.9rem;line-height:1.5}
+.exencion-top .wrap{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding-top:.9rem;padding-bottom:.9rem;align-items:start}
+.exencion-top__marca{background:var(--rojo);color:var(--blanco);padding:.2rem .5rem}
+.exencion-top p+p{margin-top:.35rem;color:#D9D3C8}
+
+/* ---------- Cabecera ---------- */
+.cab{border-bottom:var(--filete) solid var(--tinta);background:var(--papel)}
+.cab__in{display:grid;grid-template-columns:auto 1fr auto;gap:1.25rem 2rem;align-items:center;padding-top:1.1rem;padding-bottom:1.1rem}
+.marca{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.marca:hover{color:var(--tinta)}
+.marca svg{width:40px;height:40px}
+.marca__nom{font-weight:800;font-size:1.65rem;letter-spacing:-.04em;line-height:1}
+.etiqueta{justify-self:start;border-left:4px solid var(--rojo);padding:.15rem 0 .15rem .7rem;font-size:.8rem;font-weight:600;color:var(--gris-texto);line-height:1.3}
+.nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.25rem 1.4rem}
+.nav a{text-decoration:none;font-weight:600;font-size:.95rem;padding:.25rem 0;border-bottom:3px solid transparent}
+.nav a:hover,.nav a[aria-current="page"]{border-bottom-color:var(--rojo);color:var(--tinta)}
+
+/* ---------- Encabezado de sección suizo ---------- */
+.sec{padding:clamp(3rem,7vw,6rem) 0;border-top:var(--filete) solid var(--tinta)}
+.sec__lab{grid-column:1/4}
+.sec__lab .num{display:block;font-size:clamp(3.5rem,8vw,6.5rem);font-weight:800;line-height:.82;letter-spacing:-.05em;color:var(--rojo)}
+.sec__lab .etq{display:block;margin-top:.8rem}
+.sec__cuerpo{grid-column:4/13}
+.sec h2{font-size:clamp(1.9rem,4vw,3.1rem);line-height:1;letter-spacing:-.035em;font-weight:800;max-width:18ch}
+.sec__intro{font-family:var(--serif);font-size:1.3rem;line-height:1.5;max-width:56ch;margin-top:1.1rem}
+
+/* ---------- Hero de inicio ---------- */
+.hero{padding:clamp(2.5rem,6vw,5rem) 0 clamp(2.5rem,6vw,4.5rem)}
+.hero__txt{grid-column:1/9}
+.hero__txt .etq{color:var(--rojo-texto)}
+.hero h1{font-size:clamp(2.6rem,7.4vw,6.4rem);line-height:.92;letter-spacing:-.045em;font-weight:800;margin-top:.9rem}
+.hero h1 em{font-style:normal;color:var(--rojo-texto)}
+.hero__lead{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.45rem);line-height:1.45;max-width:46ch;margin-top:1.5rem}
+.hero__ilu{grid-column:9/13;align-self:end}
+.esno{grid-column:1/13;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);margin-top:clamp(2rem,4vw,3rem);border-top:4px solid var(--tinta)}
+.esno__b{padding:1.3rem 1.3rem 1.5rem 0}
+.esno__b h2{font-size:1rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+.esno__b ul{list-style:none;margin-top:.8rem}
+.esno__b li{padding:.45rem 0;border-top:1px solid var(--tinta);font-weight:500}
+.esno__es{grid-column:1/7}
+.esno__no{grid-column:7/13;background:var(--rojo);color:var(--blanco);padding-left:1.3rem}
+.esno__no li{border-top-color:rgba(255,255,255,.55)}
+
+/* ---------- Destacados (retícula asimétrica) ---------- */
+.dest{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);margin-top:2.5rem}
+.tj{position:relative;overflow:hidden;border-top:var(--filete) solid var(--tinta);padding:1.3rem 0 7rem;text-decoration:none;display:flex;flex-direction:column;min-height:18rem}
+.tj:hover{color:inherit}
+.tj:hover .tj__tit{text-decoration:underline;text-decoration-thickness:3px}
+.tj__n{position:absolute;right:-.06em;bottom:-.3em;font-size:clamp(8rem,14vw,12rem);font-weight:800;line-height:1;letter-spacing:-.06em;color:var(--rojo);pointer-events:none}
+.tj__tit{font-size:clamp(1.35rem,2.2vw,1.8rem);line-height:1.05;letter-spacing:-.025em;font-weight:800;margin-top:.7rem;max-width:22ch}
+.tj__dek{font-family:var(--serif);font-size:1.12rem;margin-top:.7rem;max-width:44ch;position:relative;z-index:1}
+.tj .etq{color:var(--gris-texto)}
+.t7{grid-column:span 7;background:var(--rojo);color:var(--blanco);border-top-color:var(--tinta);padding-left:1.3rem;padding-right:1.3rem}
+.t7 .tj__n{color:var(--tinta)}
+.t7 .etq{color:var(--blanco)}
+.t7 .tj__tit{font-size:clamp(1.8rem,3.4vw,2.8rem);max-width:16ch}
+.t5{grid-column:span 5}
+.t4{grid-column:span 4}
+.t4:nth-of-type(4) .tj__n{color:var(--tinta)}
+.t12{grid-column:span 12;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding-bottom:1.5rem;min-height:0;background:var(--gris-claro);border-top-color:var(--rojo)}
+.t12 .tj__txt{grid-column:3/9;padding-top:.3rem}
+.t12 .tj__n{position:static;grid-column:1/3;font-size:clamp(3rem,6vw,5rem);line-height:.85;padding-left:1rem}
+.t12 svg{grid-column:9/13;width:100%;max-width:260px;justify-self:end;margin-right:1rem}
+
+/* ---------- Calendario de 24 casillas ---------- */
+.cal-cab{display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap}
+.cal-leyenda{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin-top:1.6rem;list-style:none;font-size:.85rem;font-weight:600}
+.cal-leyenda li{display:flex;align-items:center;gap:.45rem}
+.cal-leyenda i{display:inline-block;width:14px;height:14px;border:2px solid var(--tinta)}
+.cal{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row dense;margin-top:2.2rem;border-top:4px solid var(--tinta);border-left:2px solid var(--tinta)}
+.cas{border-right:2px solid var(--tinta);border-bottom:2px solid var(--tinta);background:var(--papel)}
+.cas summary{list-style:none;cursor:pointer;position:relative;overflow:hidden;min-height:11.5rem;padding:.9rem .9rem 3.6rem;display:flex;flex-direction:column;gap:.45rem}
+.cas summary::-webkit-details-marker{display:none}
+.cas__n{position:absolute;right:-.05em;bottom:-.28em;font-size:6.4rem;font-weight:800;line-height:1;letter-spacing:-.07em;pointer-events:none}
+.cas__tit{font-weight:700;font-size:1.02rem;line-height:1.15;position:relative;z-index:1;max-width:14ch}
+.cas summary:hover .cas__tit{text-decoration:underline}
+.cas--dato summary{background:var(--rojo);color:var(--blanco)}
+.cas--dato .cas__n{color:var(--tinta)}
+.cas--pregunta summary{background:var(--tinta);color:var(--papel)}
+.cas--pregunta .cas__n{color:var(--rojo)}
+.cas--concepto .cas__n{color:var(--rojo)}
+.cas--paso summary{background:var(--gris-claro)}
+.cas--paso .cas__n{color:var(--tinta)}
+.cas--mito summary{background:var(--papel);box-shadow:inset 0 0 0 6px var(--rojo)}
+.cas--mito .cas__n{color:var(--rojo)}
+.cas[open]{grid-column:1/-1}
+.cas[open] summary{min-height:7rem}
+.ficha{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding:1.5rem 1.2rem 1.8rem;border-top:2px solid var(--tinta);background:var(--blanco)}
+.ficha p{grid-column:1/9;font-family:var(--serif);font-size:1.3rem;line-height:1.45}
+.ficha .ficha__mas{grid-column:9/13;align-self:end;font-weight:700;font-size:.95rem}
+.ficha .ficha__nota{grid-column:1/13;font-size:.85rem;color:var(--gris-texto);margin-top:.9rem;font-family:var(--sans)}
+.leg-l1{background:var(--rojo)}.leg-l2{background:var(--tinta)}.leg-l3{background:var(--papel)}.leg-l4{background:var(--gris-claro)}.leg-l5{background:var(--papel);box-shadow:inset 0 0 0 3px var(--rojo)}
+
+/* ---------- Bloque "cómo trabajamos" de inicio ---------- */
+.franja{background:var(--tinta);color:var(--papel);border-top:0}
+.franja .sec__lab .num{color:var(--rojo)}
+.franja ol{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin-top:2rem}
+.franja li{border-top:4px solid var(--rojo);padding-top:1rem;font-family:var(--serif);font-size:1.15rem}
+.franja li strong{display:block;font-family:var(--sans);font-size:1rem;margin-bottom:.35rem}
+.franja a{color:var(--papel)}
+.franja a:hover{color:var(--gris)}
+
+/* ---------- Página de artículo ---------- */
+.art-cab{border-bottom:var(--filete) solid var(--tinta)}
+.art-cab .g12{align-items:stretch}
+.art-cab__bloque{grid-column:1/5;background:var(--rojo);position:relative;overflow:hidden;min-height:20rem;margin-left:calc(-1 * var(--gut))}
+.art-cab__bloque .n{position:absolute;left:-.04em;bottom:-.3em;font-size:clamp(12rem,24vw,19rem);font-weight:800;line-height:1;letter-spacing:-.07em;color:var(--tinta)}
+.art-cab__bloque svg{position:absolute;right:1rem;top:1rem;width:45%}
+.art-cab__txt{grid-column:5/13;padding:clamp(2rem,5vw,4rem) 0}
+.art-cab__txt .etq{color:var(--rojo-texto)}
+.art-cab h1{font-size:clamp(2.1rem,5vw,4.2rem);line-height:.98;letter-spacing:-.04em;font-weight:800;margin-top:.8rem;max-width:20ch}
+.art-cab__dek{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.45rem);line-height:1.45;margin-top:1.2rem;max-width:50ch}
+.art-cab__meta{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.5rem;font-size:.85rem;font-weight:600;color:var(--gris-texto)}
+.art-cuerpo{padding:clamp(2.5rem,5vw,4rem) 0 clamp(3rem,6vw,5rem)}
+.indice{grid-column:1/4;align-self:start;position:sticky;top:1.5rem}
+.indice ol{list-style:none;margin-top:.8rem;border-top:4px solid var(--tinta)}
+.indice li{border-bottom:1px solid var(--tinta)}
+.indice a{display:block;padding:.55rem 0;text-decoration:none;font-size:.92rem;font-weight:600;line-height:1.3}
+.prosa{grid-column:4/11;font-family:var(--serif);font-size:1.28rem;line-height:1.6}
+.prosa>*+*{margin-top:1.05em}
+.prosa h2{font-family:var(--sans);font-size:1.65rem;line-height:1.1;letter-spacing:-.025em;font-weight:800;margin-top:2.2em;padding-top:.7rem;border-top:4px solid var(--tinta);scroll-margin-top:1rem}
+.prosa h3{font-family:var(--sans);font-size:1.15rem;font-weight:800;margin-top:1.6em}
+.prosa ul,.prosa ol{padding-left:1.3em}
+.prosa li+li{margin-top:.4em}
+.prosa table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:1rem}
+.prosa caption{text-align:left;font-weight:700;padding-bottom:.5rem}
+.prosa th,.prosa td{border-bottom:1px solid var(--tinta);padding:.55rem .5rem .55rem 0;text-align:left;vertical-align:top}
+.prosa thead th{border-bottom:3px solid var(--tinta)}
+.prosa td.num,.prosa th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tabla-scroll{overflow-x:auto}
+.aviso-edu{font-family:var(--sans);font-size:.92rem;line-height:1.5;border:2px solid var(--tinta);padding:.9rem 1rem;background:var(--blanco)}
+.aviso-edu strong{color:var(--rojo-texto)}
+.sabias{background:var(--rojo);color:var(--blanco);padding:1.4rem 1.4rem 1.6rem;font-family:var(--sans);font-size:1.1rem;line-height:1.5}
+.sabias .etq{display:block;margin-bottom:.5rem}
+.sabias p+p{margin-top:.6rem}
+.fuentes{font-family:var(--sans);font-size:.95rem;line-height:1.5}
+.fuentes li+li{margin-top:.55em}
+.exc-corta{font-family:var(--sans);font-size:.85rem;color:var(--gris-texto);border-left:4px solid var(--rojo);padding-left:.8rem}
+.mas{border-top:var(--filete) solid var(--tinta);padding:2.5rem 0 3.5rem}
+.mas ul{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin-top:1.2rem}
+.mas li a{display:block;text-decoration:none;border-top:4px solid var(--tinta);padding-top:.7rem;font-weight:700;line-height:1.2}
+.mas li a span{display:block;color:var(--rojo-texto);font-size:2.2rem;font-weight:800;letter-spacing:-.05em;line-height:1}
+
+/* ---------- Acerca de (dos columnas editoriales) ---------- */
+.acerca{padding:clamp(2.5rem,6vw,5rem) 0}
+.acerca__txt{grid-column:1/8}
+.acerca__txt h1{font-size:clamp(2.4rem,6vw,4.8rem);line-height:.95;letter-spacing:-.045em;font-weight:800}
+.acerca__txt .prosa{margin-top:1.8rem}
+.acerca__ilu{grid-column:9/13;align-self:start;position:sticky;top:1.5rem}
+.acerca__ilu figcaption{font-size:.8rem;color:var(--gris-texto);margin-top:.6rem;border-top:2px solid var(--tinta);padding-top:.5rem}
+.ficha-tec{font-family:var(--sans);font-size:1rem;border-top:4px solid var(--tinta)}
+.ficha-tec div{display:grid;grid-template-columns:9rem 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--tinta)}
+.ficha-tec dt{font-weight:700}
+
+/* ---------- Política editorial (lista numerada con iconos) ---------- */
+.pe-cab{padding:clamp(2.5rem,6vw,5rem) 0 2rem}
+.pe-cab h1{grid-column:1/10;font-size:clamp(2.4rem,6vw,4.8rem);line-height:.95;letter-spacing:-.045em;font-weight:800}
+.pe-cab p{grid-column:1/9;font-family:var(--serif);font-size:1.35rem;margin-top:1.2rem}
+.criterios{list-style:none;counter-reset:c;padding-bottom:4rem}
+.criterios li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);border-top:4px solid var(--tinta);padding:1.6rem 0}
+.criterios li:nth-child(odd) .cr-ico{background:var(--rojo)}
+.cr-n{grid-column:1/3;font-size:clamp(3rem,6vw,4.8rem);font-weight:800;line-height:.82;letter-spacing:-.06em}
+.cr-ico{grid-column:3/5;width:72px;height:72px;background:var(--tinta);display:grid;place-items:center}
+.cr-ico svg{width:44px;height:44px}
+.cr-txt{grid-column:5/13}
+.cr-txt h2{font-size:1.45rem;line-height:1.1;letter-spacing:-.02em;font-weight:800}
+.cr-txt p{font-family:var(--serif);font-size:1.2rem;margin-top:.5rem;max-width:62ch}
+
+/* ---------- Páginas legales (documento tipográfico) ---------- */
+.doc{max-width:780px;margin:0 auto;padding:clamp(2.5rem,6vw,4.5rem) var(--gut) clamp(3rem,6vw,5rem)}
+.doc h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1;letter-spacing:-.04em;font-weight:800}
+.doc .doc__act{font-size:.9rem;color:var(--gris-texto);margin-top:.8rem;padding-bottom:1.4rem;border-bottom:4px solid var(--tinta)}
+.doc h2{font-size:1.25rem;font-weight:800;letter-spacing:-.01em;margin-top:2.4rem}
+.doc p,.doc li{font-family:var(--serif);font-size:1.2rem;line-height:1.6}
+.doc p{margin-top:.8rem}
+.doc ul{padding-left:1.3em;margin-top:.6rem}
+.doc li+li{margin-top:.35rem}
+.doc .datos{font-family:var(--sans);font-size:1rem;margin-top:1rem}
+.doc .datos div{display:grid;grid-template-columns:9rem 1fr;gap:1rem;padding:.5rem 0;border-bottom:1px solid var(--tinta)}
+.doc .datos dt{font-weight:700}
+.doc .destacado{border:2px solid var(--tinta);padding:1rem 1.1rem;margin-top:1.2rem;font-family:var(--sans);font-size:1rem;background:var(--blanco)}
+
+/* ---------- Pie ---------- */
+.pie{background:var(--tinta);color:var(--papel);border-top:16px solid var(--rojo);padding:clamp(2.5rem,5vw,4rem) 0 2rem;font-size:.92rem}
+.pie a{color:var(--papel)}
+.pie a:hover{color:var(--gris)}
+.pie__exc{grid-column:1/13;border-bottom:2px solid #3A3835;padding-bottom:1.6rem;margin-bottom:1.8rem}
+.pie__exc p{max-width:90ch;line-height:1.55}
+.pie__exc p+p{margin-top:.6rem;color:#D9D3C8}
+.pie__marca{grid-column:1/5}
+.pie__marca .marca__nom{font-size:2.6rem;color:var(--papel)}
+.pie__marca p{margin-top:.6rem;color:#D9D3C8;max-width:30ch}
+.pie__datos{grid-column:5/10}
+.pie__datos dl div{display:grid;grid-template-columns:6.5rem 1fr;gap:.8rem;padding:.35rem 0;border-top:1px solid #3A3835}
+.pie__datos dt{color:#B9B2A6;font-weight:600}
+.pie__leg{grid-column:10/13}
+.pie__leg ul{list-style:none}
+.pie__leg li{padding:.35rem 0;border-top:1px solid #3A3835}
+.pie .etq{color:var(--gris);display:block;margin-bottom:.7rem}
+.pie__fin{grid-column:1/13;margin-top:2rem;padding-top:1rem;border-top:2px solid #3A3835;color:#B9B2A6;font-size:.82rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1000px){
+  .cal{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .t7,.t5{grid-column:span 12}
+  .t4{grid-column:span 6}
+  .t4:last-of-type{grid-column:span 12}
+  .franja ol,.mas ul{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .cab__in{grid-template-columns:1fr;gap:.8rem}
+  .g12>*,.esno>*,.criterios li>*,.ficha>*{grid-column:1/-1 !important}
+  .sec__lab{margin-bottom:1.6rem}
+  .hero__ilu{max-width:320px;margin-top:2rem}
+  .esno__no{padding-left:1.1rem;padding-right:1.1rem;margin-top:0}
+  .esno__b{padding-right:0}
+  .esno__no{padding-right:1.1rem}
+  .t12{display:block;padding:1.2rem 1rem 1.5rem}
+  .t12 .tj__n{padding-left:0}
+  .t12 svg{max-width:200px;margin:1.2rem 0 0}
+  .art-cab__bloque{min-height:13rem;margin-right:calc(-1 * var(--gut))}
+  .art-cab__bloque .n{font-size:12rem}
+  .art-cab__bloque svg{width:34%}
+  .indice{position:static;margin-bottom:2rem}
+  .acerca__ilu{position:static;max-width:380px;margin-top:2.5rem}
+  .cr-ico{margin:1rem 0}
+  .pie__datos,.pie__leg{margin-top:1.8rem}
+  .ficha .ficha__mas{margin-top:1rem}
+}
+@media (max-width:600px){
+  body{font-size:1rem}
+  .cal{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cas summary{min-height:10rem}
+  .cas__n{font-size:5.2rem}
+  .t4{grid-column:span 12 !important}
+  .franja ol,.mas ul{grid-template-columns:1fr}
+  .prosa{font-size:1.18rem}
+  .ficha-tec div,.doc .datos div,.pie__datos dl div{grid-template-columns:1fr;gap:.1rem}
+  .exencion-top .wrap{grid-template-columns:1fr;gap:.5rem}
+  .exencion-top__marca{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ---------- Navegación de una sola página (solo CSS, sin JavaScript) ---------- */
+.vista{display:none}
+#inicio{display:block}
+.vista:target,.vista:has(:target){display:block}
+body:has(.vista:not(#inicio):target) #inicio,
+body:has(.vista:not(#inicio) :target) #inicio{display:none}
+.vista{scroll-margin-top:0}
+.nav a.activo{border-bottom-color:var(--rojo)}
+body:has(#acerca-de:target) .nav a[href="#acerca-de"]{border-bottom-color:var(--rojo)}
+body:has(#politica-editorial:target) .nav a[href="#politica-editorial"]{border-bottom-color:var(--rojo)}
+body:has(.vista[id$="-pronto"]:target, #reparto-o-capitalizacion:target, #tasa-de-reemplazo:target, #planes-de-empleo-y-privados:target, #lagunas-previsionales:target, #cuanto-necesitaras:target) .nav a[href="#articulos"]{border-bottom-color:var(--rojo)}
+
+</style>
+</head>
+<body>
+<!--
+  IDENTIDAD VISUAL DE ganadros (propia, no basada en ninguna marca)
+  Dirección estética nº 11: cartel suizo / estilo tipográfico internacional.
+  Paleta: blanco roto #F4F1EA · rojo bermellón #D2381C (texto: #A82C16) · negro tinta #141414 · gris cálido #B3AB9E / #E3DDD1 / #55504A
+  Tipografía: Schibsted Grotesk (titulares e interfaz) + Crimson Pro (lectura).
+  Iconografía/ilustración: composiciones geométricas planas de círculos, cuadrados y triángulos; sin figuras humanas.
+  Retícula: 12 columnas, esquinas rectas, bloques sólidos, números gigantes recortados y filetes gruesos.
+-->
+<aside class="exencion-top" role="note" aria-label="Aviso importante">
+  <div class="wrap">
+    <span class="etq exencion-top__marca">Aviso</span>
+    <div><p>ganadros es un blog independiente de educación financiera. No es un banco, una administradora de fondos de pensiones, una aseguradora ni un sitio oficial de ninguna entidad pública o privada, y no presta servicios financieros ni terapéuticos. ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p><p>El contenido de este sitio es informativo y no constituye asesoramiento psicológico, médico ni financiero. Si atraviesas un malestar emocional importante, consulta a un profesional de la salud.</p></div>
+  </div>
+</aside>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cab">
+  <div class="wrap cab__in">
+    <a class="marca" href="#inicio" aria-label="ganadros, ir al inicio"><svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect width="40" height="40" fill="#D2381C"/><circle cx="0" cy="40" r="26" fill="#141414"/><rect x="24" y="6" width="10" height="10" fill="#F4F1EA"/></svg><span class="marca__nom">ganadros</span></a>
+    <span class="etiqueta">Blog independiente · Educación financiera y bienestar</span>
+    <nav class="nav" aria-label="Navegación principal"><ul><li><a href="#inicio">Inicio</a></li><li><a href="#articulos">Artículos</a></li><li><a href="#calendario">Calendario</a></li><li><a href="#acerca-de">Acerca de</a></li><li><a href="#politica-editorial">Política editorial</a></li></ul></nav>
+  </div>
+</header>
+<main id="contenido">
+<section class="vista" id="inicio" aria-label="ganadros">
+<section class="hero" aria-labelledby="hero-tit">
+  <div class="wrap g12">
+    <div class="hero__txt">
+      <span class="etq">Pensiones y jubilación · Blog educativo independiente</span>
+      <h1 id="hero-tit">Tu jubilación se decide <em>mucho antes</em> de jubilarte.</h1>
+      <p class="hero__lead">ganadros explica cómo funcionan el sistema público de pensiones, los planes privados y de empleo, cuánto podrías necesitar para jubilarte y por qué empezar pronto marca la diferencia. Con fuentes verificables y cifras en base 100.</p>
+    </div>
+    <div class="hero__ilu"><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica: cinco cuadrados negros de altura creciente bajo un gran círculo rojo, que evocan el ahorro que crece con el tiempo"><title>Composición geométrica: cinco cuadrados negros de altura creciente bajo un gran círculo rojo, que evocan el ahorro que crece con el tiempo</title><rect width="400" height="400" fill="#E3DDD1"/><circle cx="270" cy="130" r="96" fill="#D2381C"/><rect x="24" y="320" width="56" height="56" fill="#141414"/><rect x="96" y="276" width="56" height="100" fill="#141414"/><rect x="168" y="224" width="56" height="152" fill="#141414"/><rect x="240" y="164" width="56" height="212" fill="#141414"/><rect x="312" y="96" width="56" height="280" fill="#141414"/><polygon points="24,24 120,24 24,120" fill="#F4F1EA"/></svg></div>
+    <div class="esno">
+      <div class="esno__b esno__es">
+        <h2>Qué es ganadros</h2>
+        <ul><li>Un blog educativo e independiente.</li><li>Artículos divulgativos con fuentes citadas.</li><li>Fichas breves para entender conceptos.</li><li>Contenido gratuito y sin registro.</li></ul>
+      </div>
+      <div class="esno__b esno__no">
+        <h2>Qué no es</h2>
+        <ul><li>No es un banco ni una administradora de pensiones.</li><li>No es un sitio oficial de ninguna entidad.</li><li>No presta servicios financieros ni terapéuticos.</li><li>No pide datos personales ni bancarios.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="articulos" aria-labelledby="art-tit">
+  <div class="wrap g12">
+    <div class="sec__lab"><span class="num" aria-hidden="true">06</span><span class="etq">Artículos destacados</span></div>
+    <div class="sec__cuerpo">
+      <h2 id="art-tit">Seis lecturas para entender tu pensión</h2>
+      <p class="sec__intro">Cada artículo sigue la misma estructura: el tema central, su contexto, un dato clave, una aplicación práctica y las fuentes consultadas.</p>
+    </div>
+  </div>
+  <div class="wrap"><div class="dest">
+<a class="tj t7" href="#reparto-o-capitalizacion"><span class="etq">Sistemas de pensiones</span><h3 class="tj__tit">Reparto o capitalización: cómo funcionan los dos grandes modelos de pensiones</h3><p class="tj__dek">Uno se basa en la solidaridad entre generaciones; el otro, en una cuenta a tu nombre. Entender la diferencia es el primer paso para saber qué puedes esperar de tu jubilación.</p><span class="tj__n" aria-hidden="true">01</span></a>
+<a class="tj t5" href="#empezar-pronto"><span class="etq">Interés compuesto</span><h3 class="tj__tit">Empezar a los 25 o a los 35: lo que cambia una década de interés compuesto</h3><p class="tj__dek">Un ejercicio en base 100 muestra por qué el tiempo es el aporte más valioso que puedes hacer a tu jubilación.</p><span class="tj__n" aria-hidden="true">03</span></a>
+<a class="tj t4" href="#tasa-de-reemplazo"><span class="etq">Conceptos clave</span><h3 class="tj__tit">La tasa de reemplazo: la cifra que resume cómo será tu jubilación</h3><span class="tj__n" aria-hidden="true">02</span></a>
+<a class="tj t4" href="#lagunas-previsionales"><span class="etq">Carreras laborales reales</span><h3 class="tj__tit">Lagunas previsionales: por qué los años sin aportar pesan tanto</h3><span class="tj__n" aria-hidden="true">05</span></a>
+<a class="tj t4" href="#planes-de-empleo-y-privados"><span class="etq">Ahorro complementario</span><h3 class="tj__tit">Planes de empleo y planes privados voluntarios: qué preguntar antes de sumarte</h3><span class="tj__n" aria-hidden="true">04</span></a>
+<a class="tj t12" href="#cuanto-necesitaras"><span class="tj__n" aria-hidden="true">06</span><span class="tj__txt"><span class="etq">Planificación</span><h3 class="tj__tit">Cuánto necesitarás para jubilarte: un método en cuatro pasos sin cifras mágicas</h3><p class="tj__dek">No existe un número universal. Sí existe una forma ordenada de estimar el tuyo a partir de tus gastos, tu pensión probable y los años que podría durar tu jubilación.</p></span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica: triángulo claro, círculo negro y cuadrado negro"><title>Composición geométrica: triángulo claro, círculo negro y cuadrado negro</title><polygon points="40,360 360,360 200,60" fill="#FFFFFF"/><circle cx="200" cy="260" r="70" fill="#141414"/><rect x="300" y="40" width="60" height="60" fill="#141414"/></svg></a></div></div>
+</section>
+
+<section class="sec" id="calendario" aria-labelledby="cal-tit">
+  <div class="wrap g12">
+    <div class="sec__lab"><span class="num" aria-hidden="true">24</span><span class="etq">Calendario de fichas</span></div>
+    <div class="sec__cuerpo">
+      <h2 id="cal-tit">24 casillas, 24 ideas sobre tu jubilación</h2>
+      <p class="sec__intro">Abre una casilla al día o todas de una vez. Cada ficha contiene un dato, una pregunta, un concepto o un paso práctico, y enlaza con el artículo que lo desarrolla.</p>
+      <ul class="cal-leyenda" aria-label="Leyenda de tipos de ficha">
+        <li><i class="leg-l1"></i>Dato</li><li><i class="leg-l2"></i>Pregunta</li><li><i class="leg-l3"></i>Concepto</li><li><i class="leg-l4"></i>Paso</li><li><i class="leg-l5"></i>Mito</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="cal"><details class="cas cas--dato" id="casilla-01">
+  <summary><span class="etq">Dato</span><span class="cas__tit">Una idea del siglo XIX</span><span class="cas__n" aria-hidden="true">01</span><span class="vh">Casilla 01</span></summary>
+  <div class="ficha"><p>En 1889, el Imperio alemán aprobó un seguro obligatorio de invalidez y vejez para trabajadores, considerado uno de los primeros sistemas de pensiones de alcance nacional.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--pregunta" id="casilla-02">
+  <summary><span class="etq">Pregunta</span><span class="cas__tit">¿En qué sistema estás?</span><span class="cas__n" aria-hidden="true">02</span><span class="vh">Casilla 02</span></summary>
+  <div class="ficha"><p>¿Sabrías decir hoy a qué sistema de pensiones aportas y cuánto se descuenta de tu ingreso cada mes? Tu boleta o recibo de pago suele indicarlo.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-03">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">Reparto</span><span class="cas__n" aria-hidden="true">03</span><span class="vh">Casilla 03</span></summary>
+  <div class="ficha"><p>Los aportes de quienes trabajan hoy financian las pensiones de quienes ya se jubilaron. Tu pensión depende, sobre todo, de las reglas del sistema y de tus años de aporte.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-04">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">Capitalización individual</span><span class="cas__n" aria-hidden="true">04</span><span class="vh">Casilla 04</span></summary>
+  <div class="ficha"><p>Tus aportes se acumulan en una cuenta a tu nombre y se invierten. Lo que recibas dependerá de cuánto aportes, de la rentabilidad obtenida y de las comisiones.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--dato" id="casilla-05">
+  <summary><span class="etq">Dato</span><span class="cas__tit">1981, un giro regional</span><span class="cas__n" aria-hidden="true">05</span><span class="vh">Casilla 05</span></summary>
+  <div class="ficha"><p>Chile empezó a aplicar en 1981 un sistema obligatorio de capitalización individual gestionado por administradoras privadas, que luego inspiró reformas en otros países de la región.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-06">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">Tasa de reemplazo</span><span class="cas__n" aria-hidden="true">06</span><span class="vh">Casilla 06</span></summary>
+  <div class="ficha"><p>Es la proporción de tu ingreso que representa tu pensión. Si ganabas 100 y tu pensión es 60, tu tasa de reemplazo es del 60 %.</p><a class="ficha__mas" href="#tasa-de-reemplazo">Amplía en: La tasa de reemplazo, explicada →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--dato" id="casilla-07">
+  <summary><span class="etq">Dato</span><span class="cas__tit">El tiempo también aporta</span><span class="cas__n" aria-hidden="true">07</span><span class="vh">Casilla 07</span></summary>
+  <div class="ficha"><p>100 unidades a un rendimiento hipotético del 4 % anual se convierten en unas 267 al cabo de 25 años, sin añadir nada más.</p><a class="ficha__mas" href="#empezar-pronto">Amplía en: Empezar a los 25 o a los 35 →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--pregunta" id="casilla-08">
+  <summary><span class="etq">Pregunta</span><span class="cas__tit">¿A qué edad?</span><span class="cas__n" aria-hidden="true">08</span><span class="vh">Casilla 08</span></summary>
+  <div class="ficha"><p>¿A qué edad te gustaría dejar de trabajar y a qué edad lo permite tu sistema? No siempre coinciden, y conocer la diferencia ayuda a planificar.</p><a class="ficha__mas" href="#cuanto-necesitaras">Amplía en: Cuánto necesitarás: cuatro pasos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--paso" id="casilla-09">
+  <summary><span class="etq">Paso</span><span class="cas__tit">Haz tu inventario</span><span class="cas__n" aria-hidden="true">09</span><span class="vh">Casilla 09</span></summary>
+  <div class="ficha"><p>Anota los periodos en los que trabajaste con aportes y sin ellos. Ese mapa es el punto de partida para saber si tienes lagunas.</p><a class="ficha__mas" href="#lagunas-previsionales">Amplía en: Lagunas previsionales →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-10">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">Lagunas previsionales</span><span class="cas__n" aria-hidden="true">10</span><span class="vh">Casilla 10</span></summary>
+  <div class="ficha"><p>Son los periodos sin aportes: desempleo, trabajo informal, cuidado de familiares. Reducen el ahorro acumulado o los años computables.</p><a class="ficha__mas" href="#lagunas-previsionales">Amplía en: Lagunas previsionales →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--dato" id="casilla-11">
+  <summary><span class="etq">Dato</span><span class="cas__tit">Jubilaciones más largas</span><span class="cas__n" aria-hidden="true">11</span><span class="vh">Casilla 11</span></summary>
+  <div class="ficha"><p>Según las estimaciones de Naciones Unidas, la esperanza de vida ha aumentado en las últimas décadas en la mayoría de los países. El ahorro tiene que durar más años.</p><a class="ficha__mas" href="#cuanto-necesitaras">Amplía en: Cuánto necesitarás: cuatro pasos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-12">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">La regla del 72</span><span class="cas__n" aria-hidden="true">12</span><span class="vh">Casilla 12</span></summary>
+  <div class="ficha"><p>Divide 72 entre una tasa anual y obtendrás, aproximadamente, los años que tarda algo en duplicarse. Con una inflación del 3 %, el poder de compra se reduce a la mitad en unos 24 años.</p><a class="ficha__mas" href="#empezar-pronto">Amplía en: Empezar a los 25 o a los 35 →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--pregunta" id="casilla-13">
+  <summary><span class="etq">Pregunta</span><span class="cas__tit">¿Tu empleador aporta?</span><span class="cas__n" aria-hidden="true">13</span><span class="vh">Casilla 13</span></summary>
+  <div class="ficha"><p>Algunas empresas ofrecen planes de empleo en los que también aportan. ¿Has preguntado en tu área de personal si existe uno y en qué condiciones?</p><a class="ficha__mas" href="#planes-de-empleo-y-privados">Amplía en: Planes de empleo y voluntarios →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--paso" id="casilla-14">
+  <summary><span class="etq">Paso</span><span class="cas__tit">Lee la letra pequeña</span><span class="cas__n" aria-hidden="true">14</span><span class="vh">Casilla 14</span></summary>
+  <div class="ficha"><p>Antes de sumarte a un plan voluntario, identifica tres datos: comisiones, plazo mínimo de permanencia y condiciones de retiro anticipado.</p><a class="ficha__mas" href="#planes-de-empleo-y-privados">Amplía en: Planes de empleo y voluntarios →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--dato" id="casilla-15">
+  <summary><span class="etq">Dato</span><span class="cas__tit">Un punto que pesa</span><span class="cas__n" aria-hidden="true">15</span><span class="vh">Casilla 15</span></summary>
+  <div class="ficha"><p>Con 100 invertidos durante 30 años, pasar de un rendimiento hipotético del 5 % a uno del 4 % por una comisión de un punto deja el resultado en unas 324 en lugar de 432.</p><a class="ficha__mas" href="#planes-de-empleo-y-privados">Amplía en: Planes de empleo y voluntarios →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--pregunta" id="casilla-16">
+  <summary><span class="etq">Pregunta</span><span class="cas__tit">¿Cuánto cuesta tu mes?</span><span class="cas__n" aria-hidden="true">16</span><span class="vh">Casilla 16</span></summary>
+  <div class="ficha"><p>¿Conoces tu gasto mensual esencial: vivienda, alimentación, salud, servicios? Es la base para estimar lo que necesitarás.</p><a class="ficha__mas" href="#cuanto-necesitaras">Amplía en: Cuánto necesitarás: cuatro pasos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--paso" id="casilla-17">
+  <summary><span class="etq">Paso</span><span class="cas__tit">Gastos que cambian</span><span class="cas__n" aria-hidden="true">17</span><span class="vh">Casilla 17</span></summary>
+  <div class="ficha"><p>Separa los gastos que probablemente bajen al jubilarte (transporte al trabajo) de los que tienden a subir (salud, cuidados).</p><a class="ficha__mas" href="#cuanto-necesitaras">Amplía en: Cuánto necesitarás: cuatro pasos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-18">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">Horizonte y riesgo</span><span class="cas__n" aria-hidden="true">18</span><span class="vh">Casilla 18</span></summary>
+  <div class="ficha"><p>Cuanto más lejos está tu jubilación, más tiempo tiene tu ahorro para recuperarse de caídas. Por eso varios sistemas ofrecen fondos con distinto nivel de riesgo según la edad.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--dato" id="casilla-19">
+  <summary><span class="etq">Dato</span><span class="cas__tit">Diez años de ventaja</span><span class="cas__n" aria-hidden="true">19</span><span class="vh">Casilla 19</span></summary>
+  <div class="ficha"><p>Aportando 100 al año a un 4 % hipotético, quien empieza a los 25 reúne unas 9503 a los 65; quien empieza a los 35, unas 5608.</p><a class="ficha__mas" href="#empezar-pronto">Amplía en: Empezar a los 25 o a los 35 →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--pregunta" id="casilla-20">
+  <summary><span class="etq">Pregunta</span><span class="cas__tit">¿Quién es tu beneficiario?</span><span class="cas__n" aria-hidden="true">20</span><span class="vh">Casilla 20</span></summary>
+  <div class="ficha"><p>¿Tienes registrados y actualizados a tus beneficiarios en tu sistema o plan? Es un trámite breve que suele olvidarse.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--concepto" id="casilla-21">
+  <summary><span class="etq">Concepto</span><span class="cas__tit">Pensiones no contributivas</span><span class="cas__n" aria-hidden="true">21</span><span class="vh">Casilla 21</span></summary>
+  <div class="ficha"><p>Muchos países cuentan con pensiones para personas mayores que no lograron aportar lo suficiente. Suelen ser modestas y dirigidas a quienes están en situación de vulnerabilidad.</p><a class="ficha__mas" href="#reparto-o-capitalizacion">Amplía en: Reparto o capitalización: los dos grandes modelos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--mito" id="casilla-22">
+  <summary><span class="etq">Mito</span><span class="cas__tit">«Ya es tarde para mí»</span><span class="cas__n" aria-hidden="true">22</span><span class="vh">Casilla 22</span></summary>
+  <div class="ficha"><p>Aportes adicionales, retrasar unos años el retiro o reducir comisiones pueden marcar diferencias aunque se empiece tarde. Cada año de ahorro suma.</p><a class="ficha__mas" href="#empezar-pronto">Amplía en: Empezar a los 25 o a los 35 →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--paso" id="casilla-23">
+  <summary><span class="etq">Paso</span><span class="cas__tit">Una revisión al año</span><span class="cas__n" aria-hidden="true">23</span><span class="vh">Casilla 23</span></summary>
+  <div class="ficha"><p>Elige una fecha fija para revisar tu estado de cuenta o tus años de aporte. Una vez al año basta para detectar errores a tiempo.</p><a class="ficha__mas" href="#lagunas-previsionales">Amplía en: Lagunas previsionales →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details><details class="cas cas--paso" id="casilla-24">
+  <summary><span class="etq">Paso</span><span class="cas__tit">Tu plan en una página</span><span class="cas__n" aria-hidden="true">24</span><span class="vh">Casilla 24</span></summary>
+  <div class="ficha"><p>Escribe en una hoja: tu sistema, tu edad objetivo, tu gasto esencial estimado, la brecha y una acción concreta para este año.</p><a class="ficha__mas" href="#cuanto-necesitaras">Amplía en: Cuánto necesitarás: cuatro pasos →</a><span class="ficha__nota">Ficha educativa. Las cifras son ilustrativas (base 100) y no representan ningún producto.</span></div>
+</details></div></div>
+</section>
+
+<section class="sec franja" aria-labelledby="met-tit">
+  <div class="wrap g12">
+    <div class="sec__lab"><span class="num" aria-hidden="true">03</span><span class="etq">Cómo trabajamos</span></div>
+    <div class="sec__cuerpo">
+      <h2 id="met-tit">Tres compromisos editoriales</h2>
+      <ol>
+        <li><strong>Fuentes verificables</strong>Citamos organismos, normas y publicaciones que cualquiera puede consultar.</li>
+        <li><strong>Cifras en base 100</strong>Usamos ejemplos hipotéticos y relativos; nunca prometemos rendimientos ni ahorros.</li>
+        <li><strong>Independencia</strong>No representamos a ninguna entidad. Lee nuestra <a href="#politica-editorial">política editorial</a>.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+</section>
+<section class="vista" id="acerca-de" aria-label="Acerca de nosotros">
+<section class="acerca" aria-labelledby="ac-tit">
+  <div class="wrap g12">
+    <div class="acerca__txt">
+      <span class="etq">Acerca de nosotros</span>
+      <h1 id="ac-tit">Un blog para entender la jubilación antes de que llegue.</h1>
+      <div class="prosa" style="grid-column:auto">
+        <h2>Quién está detrás</h2>
+        <p>ganadros es un proyecto editorial independiente cuyo titular y responsable es HORACIO BURBANO GARCIA, con domicilio en Av. de la Cultura 808, Santa Anita 15011, Perú. El sitio se publica en el dominio ganadros.blog. No forma parte de ningún grupo financiero, administradora de pensiones, aseguradora ni organismo público.</p>
+        <h2>Objetivo del blog</h2>
+        <p>Queremos que cualquier persona, sin formación financiera previa, entienda cómo funcionan los sistemas de pensiones, qué preguntas debe hacerse sobre su propia jubilación y por qué el tiempo es su mejor aliado. Explicamos conceptos; no vendemos productos ni gestionamos ahorros.</p>
+        <h2>Método de elaboración</h2>
+        <p>Cada artículo parte de fuentes primarias o de referencia: normas publicadas, informes de organismos internacionales como la OCDE, la OIT, la CEPAL, el Banco Mundial o Naciones Unidas, y publicaciones de los reguladores de cada país. Contrastamos cada dato con al menos una fuente verificable y la citamos al final del texto. Cuando no podemos respaldar una cifra, no la publicamos.</p>
+        <p>Los ejemplos numéricos se presentan en base 100 o en porcentajes, se identifican siempre como hipotéticos y se calculan de forma transparente para que puedas reproducirlos.</p>
+        <h2>Declaración de independencia</h2>
+        <p>ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca, entidad financiera, empleador ni organismo público. Las entidades mencionadas en los artículos se citan solo como fuentes o con fines descriptivos. Si el sitio muestra publicidad, esta no influye en la selección ni en el tratamiento de los temas.</p>
+        <h2>Contacto</h2>
+        <dl class="ficha-tec">
+          <div><dt>Titular</dt><dd>HORACIO BURBANO GARCIA</dd></div>
+          <div><dt>Dirección</dt><dd>Av. de la Cultura 808, Santa Anita 15011, Perú</dd></div>
+          <div><dt>Teléfono</dt><dd><a href="tel:+5115182800">+51 1 5182800</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:soporte@ganadros.blog">soporte@ganadros.blog</a></dd></div>
+          <div><dt>Dominio</dt><dd>ganadros.blog</dd></div>
+        </dl>
+      </div>
+    </div>
+    <figure class="acerca__ilu"><svg viewBox="0 0 400 520" role="img" aria-label="Composición geométrica con un círculo rojo, un cuadrado negro y un triángulo gris sobre fondo claro, dispuestos en retícula"><title>Composición geométrica con un círculo rojo, un cuadrado negro y un triángulo gris sobre fondo claro, dispuestos en retícula</title><rect width="400" height="520" fill="#E3DDD1"/><rect x="0" y="0" width="200" height="200" fill="#141414"/><circle cx="300" cy="100" r="100" fill="#D2381C"/><polygon points="0,520 200,520 0,320" fill="#B3AB9E"/><rect x="200" y="200" width="200" height="120" fill="#F4F1EA"/><circle cx="300" cy="420" r="60" fill="#141414"/><rect x="40" y="240" width="120" height="16" fill="#D2381C"/><rect x="40" y="272" width="80" height="16" fill="#141414"/></svg><figcaption>Ilustración geométrica propia de ganadros. El sitio no utiliza fotografías de personas.</figcaption></figure>
+  </div>
+</section>
+</section>
+<section class="vista" id="politica-editorial" aria-label="Política editorial">
+<section class="pe-cab"><div class="wrap g12"><h1>Política editorial</h1><p>Los criterios con los que ganadros selecciona, verifica y publica sus contenidos. Última actualización: 3 de noviembre de 2026.</p></div></section>
+<div class="wrap"><ol class="criterios"><li><span class="cr-n" aria-hidden="true">01</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle cx="22" cy="22" r="16" fill="#F4F1EA"/></svg></span><div class="cr-txt"><h2><span class="vh">1. </span>Temas de interés general</h2><p>Publicamos contenidos educativos sobre pensiones, jubilación y ahorro a largo plazo que resulten útiles para un público amplio. No publicamos contenidos promocionales ni comparativas comerciales de productos.</p></div></li><li><span class="cr-n" aria-hidden="true">02</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><rect x="6" y="6" width="32" height="32" fill="#F4F1EA"/><rect x="14" y="14" width="16" height="16" fill="#141414"/></svg></span><div class="cr-txt"><h2><span class="vh">2. </span>Fuentes verificables</h2><p>Cada dato procede de una fuente que cualquier lector puede consultar: normas oficiales, informes de organismos internacionales, reguladores o publicaciones académicas. Las fuentes se citan al final de cada artículo.</p></div></li><li><span class="cr-n" aria-hidden="true">03</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><polygon points="22,4 40,40 4,40" fill="#F4F1EA"/></svg></span><div class="cr-txt"><h2><span class="vh">3. </span>Sin cifras ni citas inventadas</h2><p>No inventamos estudios, estadísticas, testimonios, autores ni citas. Si un dato no puede respaldarse, se omite o se presenta como idea general, sin cifra.</p></div></li><li><span class="cr-n" aria-hidden="true">04</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><rect x="4" y="18" width="36" height="8" fill="#F4F1EA"/><rect x="18" y="4" width="8" height="36" fill="#F4F1EA"/></svg></span><div class="cr-txt"><h2><span class="vh">4. </span>Ejemplos hipotéticos y relativos</h2><p>Los cálculos se expresan en base 100 o en porcentajes, se identifican como hipotéticos y nunca constituyen una promesa de rentabilidad, ahorro ni resultado.</p></div></li><li><span class="cr-n" aria-hidden="true">05</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle cx="14" cy="22" r="10" fill="#F4F1EA"/><rect x="26" y="12" width="14" height="20" fill="#F4F1EA"/></svg></span><div class="cr-txt"><h2><span class="vh">5. </span>Independencia frente a marcas y entidades</h2><p>No representamos a ninguna entidad. Las marcas u organismos mencionados aparecen solo con fines descriptivos o como fuente, sin afiliación ni respaldo.</p></div></li><li><span class="cr-n" aria-hidden="true">06</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><polygon points="4,4 40,4 4,40" fill="#F4F1EA"/><circle cx="32" cy="32" r="8" fill="#F4F1EA"/></svg></span><div class="cr-txt"><h2><span class="vh">6. </span>Publicidad separada del contenido</h2><p>Si el sitio muestra publicidad, esta se identifica como tal y no influye en la elección de temas, el enfoque ni las conclusiones de los artículos.</p></div></li><li><span class="cr-n" aria-hidden="true">07</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" fill="#F4F1EA"/><rect x="24" y="24" width="16" height="16" fill="#F4F1EA"/></svg></span><div class="cr-txt"><h2><span class="vh">7. </span>Revisión y actualización</h2><p>Revisamos periódicamente los artículos y señalamos la fecha de actualización. Las reglas de los sistemas de pensiones cambian: verifica siempre la información vigente en las fuentes oficiales de tu país.</p></div></li><li><span class="cr-n" aria-hidden="true">08</span><span class="cr-ico" aria-hidden="true"><svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle cx="22" cy="22" r="18" fill="none" stroke="#F4F1EA" stroke-width="6"/></svg></span><div class="cr-txt"><h2><span class="vh">8. </span>Correcciones</h2><p>Si detectas un error, escríbenos a soporte@ganadros.blog. Revisaremos el caso y, si corresponde, corregiremos el texto indicando la modificación.</p></div></li></ol></div>
+</section>
+<section class="vista" id="politica-de-privacidad" aria-label="Política de privacidad">
+<article class="doc"><h1>Política de privacidad</h1><p class="doc__act">Última actualización: 3 de noviembre de 2026</p>
+<h2>1. Responsable del tratamiento</h2>
+<p>El responsable de los datos personales tratados a través de este sitio es:</p><dl class="datos">
+<div><dt>Titular</dt><dd>HORACIO BURBANO GARCIA</dd></div>
+<div><dt>Dirección</dt><dd>Av. de la Cultura 808, Santa Anita 15011, Perú</dd></div>
+<div><dt>Teléfono</dt><dd>+51 1 5182800</dd></div>
+<div><dt>Email</dt><dd><a href="mailto:soporte@ganadros.blog">soporte@ganadros.blog</a></dd></div>
+<div><dt>Dominio</dt><dd>ganadros.blog</dd></div>
+</dl>
+<h2>2. Qué datos se pueden tratar</h2>
+<p>ganadros no tiene formularios de registro, no ofrece cuentas de usuario y no solicita datos bancarios ni documentos de identidad. Aun así, como cualquier sitio web, puede tratar algunos datos:</p>
+<ul><li><strong>Datos técnicos de navegación:</strong> dirección IP, tipo de navegador y dispositivo, sistema operativo, páginas visitadas, fecha y hora de acceso. Los servidores de alojamiento suelen registrarlos de forma automática por motivos de seguridad y funcionamiento.</li>
+<li><strong>Datos analíticos:</strong> información agregada o seudonimizada sobre el uso del sitio, si se utilizan herramientas de medición de audiencia.</li>
+<li><strong>Datos con fines publicitarios:</strong> identificadores de cookies o de dispositivo, si el sitio muestra publicidad servida por terceros, según se explica en la <a href="#politica-de-cookies">Política de cookies</a>.</li>
+<li><strong>Datos que nos envíes por correo electrónico:</strong> si escribes a soporte@ganadros.blog, trataremos tu dirección y el contenido de tu mensaje solo para responderte.</li></ul>
+<h2>3. Finalidades</h2>
+<ul><li>Permitir el funcionamiento técnico y la seguridad del sitio.</li><li>Conocer de forma agregada cómo se usa el sitio para mejorar sus contenidos.</li><li>Mostrar publicidad, cuando exista, de acuerdo con las preferencias que hayas indicado.</li><li>Atender las consultas recibidas por correo electrónico.</li></ul>
+<h2>4. Base del tratamiento</h2>
+<p>El tratamiento se basa en el interés legítimo en el funcionamiento seguro del sitio, en tu consentimiento para las cookies no necesarias cuando así lo exija la normativa, y en tu propia solicitud cuando nos escribes.</p>
+<h2>5. Destinatarios</h2>
+<p>Los datos pueden ser tratados por proveedores que prestan servicios al sitio, como el alojamiento web o, en su caso, servicios de analítica o publicidad, que actúan con sus propias políticas de privacidad. No vendemos datos personales.</p>
+<h2>6. Conservación</h2>
+<p>Los datos se conservan durante el tiempo necesario para la finalidad para la que se recogieron y, después, durante los plazos que exija la normativa aplicable.</p>
+<h2>7. Tus derechos</h2>
+<p>Puedes ejercer tus derechos de acceso, rectificación, cancelación u oposición, y los demás que reconozca la normativa aplicable, incluida, cuando corresponda, la Ley N.º 29733, Ley de Protección de Datos Personales del Perú, escribiendo a soporte@ganadros.blog. También puedes presentar una reclamación ante la autoridad de protección de datos competente.</p>
+<h2>8. Cambios en esta política</h2>
+<p>Podemos actualizar esta política para reflejar cambios en el sitio o en la normativa. La fecha de la última actualización figura al inicio del documento.</p></article>
+</section>
+<section class="vista" id="politica-de-cookies" aria-label="Política de cookies">
+<article class="doc"><h1>Política de cookies</h1><p class="doc__act">Última actualización: 3 de noviembre de 2026</p>
+<h2>1. Qué son las cookies</h2>
+<p>Las cookies son pequeños archivos que un sitio web guarda en tu navegador para recordar información sobre tu visita. Tecnologías similares, como el almacenamiento local o los píxeles, cumplen funciones parecidas y se rigen por esta misma política.</p>
+<h2>2. Tipos de cookies que puede utilizar este sitio</h2>
+<ul><li><strong>Técnicas o necesarias:</strong> permiten que el sitio funcione y se muestre correctamente. No requieren consentimiento.</li>
+<li><strong>Analíticas o de medición:</strong> permiten conocer de forma agregada cuántas personas visitan el sitio y qué contenidos consultan, para mejorarlo.</li>
+<li><strong>Publicitarias:</strong> si el sitio muestra anuncios de terceros, estos pueden utilizar cookies para mostrar publicidad, limitar su frecuencia o medir su eficacia, y en algunos casos para personalizarla según tu navegación.</li></ul>
+<p>Las cookies analíticas y publicitarias pueden ser propias o de terceros. Cuando la normativa lo exija, solo se instalarán con tu consentimiento previo.</p>
+<h2>3. Cómo gestionar o eliminar las cookies</h2>
+<p>Puedes aceptar, rechazar o eliminar las cookies desde la configuración de tu navegador. Ten en cuenta que bloquear las cookies técnicas puede afectar al funcionamiento del sitio. También puedes revisar las opciones de personalización de anuncios que ofrecen los propios proveedores de publicidad.</p>
+<h2>4. Contacto</h2>
+<p>Para cualquier consulta sobre esta política, escribe a <a href="mailto:soporte@ganadros.blog">soporte@ganadros.blog</a>.</p><dl class="datos">
+<div><dt>Titular</dt><dd>HORACIO BURBANO GARCIA</dd></div>
+<div><dt>Dirección</dt><dd>Av. de la Cultura 808, Santa Anita 15011, Perú</dd></div>
+<div><dt>Teléfono</dt><dd>+51 1 5182800</dd></div>
+<div><dt>Email</dt><dd><a href="mailto:soporte@ganadros.blog">soporte@ganadros.blog</a></dd></div>
+<div><dt>Dominio</dt><dd>ganadros.blog</dd></div>
+</dl></article>
+</section>
+<section class="vista" id="aviso-legal" aria-label="Aviso legal">
+<article class="doc"><h1>Aviso legal</h1><p class="doc__act">Última actualización: 3 de noviembre de 2026</p>
+<h2>1. Titularidad del sitio</h2>
+<p>El sitio web ganadros.blog (en adelante, «ganadros» o «el sitio») es titularidad de:</p><dl class="datos">
+<div><dt>Titular</dt><dd>HORACIO BURBANO GARCIA</dd></div>
+<div><dt>Dirección</dt><dd>Av. de la Cultura 808, Santa Anita 15011, Perú</dd></div>
+<div><dt>Teléfono</dt><dd>+51 1 5182800</dd></div>
+<div><dt>Email</dt><dd><a href="mailto:soporte@ganadros.blog">soporte@ganadros.blog</a></dd></div>
+<div><dt>Dominio</dt><dd>ganadros.blog</dd></div>
+</dl>
+<h2>2. Objeto</h2>
+<p>ganadros es un blog independiente de educación financiera dedicado a explicar el funcionamiento de los sistemas de pensiones, los planes privados y de empleo, y la planificación de la jubilación. El sitio no ofrece productos ni servicios financieros, no gestiona ahorros ni inversiones y no dispone de áreas de acceso de usuarios.</p>
+<h2>3. Carácter informativo</h2>
+<p class="destacado">El contenido de este sitio es informativo y no constituye asesoramiento psicológico, médico ni financiero. Si atraviesas un malestar emocional importante, consulta a un profesional de la salud.</p>
+<p>Los contenidos son de carácter general y educativo. Las cifras de los ejemplos son hipotéticas, se expresan en base 100 o en porcentajes y no garantizan ningún resultado. Antes de tomar decisiones financieras, consulta las fuentes oficiales de tu país y, si lo necesitas, a un profesional debidamente registrado.</p>
+<h2>4. Ausencia de afiliación</h2>
+<p class="destacado">ganadros es un blog independiente de educación financiera. No es un banco, una administradora de fondos de pensiones, una aseguradora ni un sitio oficial de ninguna entidad pública o privada, y no presta servicios financieros ni terapéuticos. ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+<p>Las marcas, entidades y organismos que se mencionan en el sitio pertenecen a sus respectivos titulares y se citan exclusivamente con fines descriptivos, informativos o como fuente.</p>
+<h2>5. Propiedad intelectual</h2>
+<p>Los textos, ilustraciones geométricas, diseño gráfico y código del sitio son obra original de ganadros o se utilizan con autorización. Se permite citar fragmentos breves con mención de la fuente y enlace al artículo original. Cualquier otro uso requiere autorización previa del titular.</p>
+<h2>6. Enlaces externos</h2>
+<p>El sitio puede citar o enlazar fuentes externas. ganadros no controla esos sitios ni se responsabiliza de sus contenidos o de su disponibilidad.</p>
+<h2>7. Responsabilidad</h2>
+<p>ganadros procura que la información sea exacta y esté actualizada, pero no puede garantizar la ausencia de errores ni la vigencia de normas que pueden cambiar. El uso que se haga de la información es responsabilidad de cada persona.</p>
+<h2>8. Publicidad</h2>
+<p>Si el sitio muestra publicidad, esta se identifica como tal y no condiciona los contenidos editoriales, conforme a la <a href="#politica-editorial">Política editorial</a>.</p>
+<h2>9. Legislación aplicable</h2>
+<p>Este aviso se rige por la legislación aplicable en el domicilio del titular, sin perjuicio de los derechos que la normativa de protección al consumidor reconozca a las personas usuarias.</p></article>
+</section>
+<section class="vista" id="reparto-o-capitalizacion" aria-label="Reparto o capitalización: los dos grandes modelos">
+<article>
+<header class="art-cab">
+  <div class="wrap g12">
+    <div class="art-cab__bloque" aria-hidden="true"><span class="n">01</span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica abstracta para el artículo 01"><title>Composición geométrica abstracta para el artículo 01</title><rect x="0" y="0" width="200" height="400" fill="#141414"/><circle cx="200" cy="200" r="120" fill="#F4F1EA"/><rect x="200" y="80" width="120" height="240" fill="#B3AB9E"/><polygon points="80,360 200,240 200,360" fill="#D2381C"/></svg></div>
+    <div class="art-cab__txt">
+      <span class="etq">Sistemas de pensiones · Artículo 01 de 06</span>
+      <h1>Reparto o capitalización: cómo funcionan los dos grandes modelos de pensiones</h1>
+      <p class="art-cab__dek">Uno se basa en la solidaridad entre generaciones; el otro, en una cuenta a tu nombre. Entender la diferencia es el primer paso para saber qué puedes esperar de tu jubilación.</p>
+      <p class="art-cab__meta"><span>Carácter educativo e informativo</span><span>Actualizado: 3 de noviembre de 2026</span><span>Lectura: 3 min</span><span>Por ganadros</span></p>
+    </div>
+  </div>
+</header>
+<div class="art-cuerpo">
+  <div class="wrap g12">
+    <nav class="indice" aria-label="Índice del artículo"><span class="etq">En este artículo</span><ol><li><a href="#a01-tema">El tema central</a></li><li><a href="#a01-contexto">Contexto y origen</a></li><li><a href="#a01-sabias">¿Sabías que…?</a></li><li><a href="#a01-aplicacion">Aplicación práctica</a></li><li><a href="#a01-fuentes">Fuentes consultadas</a></li></ol></nav>
+    <div class="prosa">
+      <p class="aviso-edu"><strong>Contenido educativo e informativo.</strong> Este artículo explica conceptos generales y no constituye asesoramiento financiero. Las cifras de los ejemplos están expresadas en base 100 o en porcentajes, son hipotéticas y no representan ningún producto ni garantizan resultados.</p>
+      <h2 id="a01-tema">El tema central</h2><p>Casi todos los sistemas de pensiones del mundo combinan, en distinta medida, dos lógicas. En un <strong>sistema de reparto</strong>, los aportes de las personas que trabajan hoy se usan para pagar las pensiones de quienes ya se jubilaron. Cuando llegue tu turno, serán las siguientes generaciones las que financien tu pensión. Lo que recibas dependerá, sobre todo, de las reglas del sistema: años de aporte, edad de retiro y fórmula de cálculo.</p>
+<p>En un <strong>sistema de capitalización individual</strong>, en cambio, tus aportes se acumulan en una cuenta a tu nombre y se invierten. Al jubilarte, el saldo acumulado se transforma en una pensión o en retiros programados. Aquí pesan tres variables: cuánto aportaste, qué rentabilidad obtuvieron esas inversiones y cuánto se pagó en comisiones.</p><h2 id="a01-contexto">Contexto y origen</h2><p>La idea de un seguro público de vejez es más antigua de lo que parece. En 1889, el Imperio alemán aprobó una ley de seguro obligatorio de invalidez y vejez para trabajadores, considerada uno de los primeros sistemas de pensiones de alcance nacional. Durante el siglo XX, este tipo de seguros se extendió por Europa y América, y en 1952 la Organización Internacional del Trabajo adoptó el Convenio sobre la seguridad social (norma mínima), núm. 102, que incluye las prestaciones de vejez entre las ramas básicas de la protección social.</p>
+<p>En América Latina, el giro más conocido llegó con Chile, que en 1981 comenzó a aplicar un sistema obligatorio de capitalización individual gestionado por administradoras privadas, creado por el Decreto Ley 3.500 de 1980. A lo largo de los años noventa, otros países de la región adoptaron esquemas inspirados en ese modelo, en algunos casos haciéndolo convivir con el sistema público. No todas esas reformas se mantuvieron: Argentina, por ejemplo, volvió a un sistema público de reparto en 2008.</p>
+      <h2 id="a01-sabias">¿Sabías que…?</h2>
+      <div class="sabias"><span class="etq">Dato central</span><p>Muchos especialistas ya no hablan de «reparto contra capitalización», sino de <strong>pilares</strong>. El Banco Mundial popularizó en 2005 un marco de varios pilares que combina una pensión básica no contributiva, un componente obligatorio, uno de ahorro voluntario y apoyos no financieros, como la familia o la vivienda.</p></div>
+      <h2 id="a01-aplicacion">Aplicación práctica</h2>
+      <p>Antes de hacer cualquier cálculo, responde tres preguntas sobre tu propia situación:</p>
+<ol><li><strong>¿A qué sistema aportas?</strong> Tu boleta o recibo de pago suele indicar el descuento previsional y la entidad que lo recibe.</li>
+<li><strong>¿Qué determina tu pensión?</strong> Si es de reparto, infórmate sobre los años mínimos de aporte y la fórmula de cálculo. Si es de capitalización, revisa tu saldo, la rentabilidad histórica de tu fondo y las comisiones.</li>
+<li><strong>¿Puedes elegir o cambiar?</strong> En algunos países es posible elegir entre sistemas o entre tipos de fondo. Consulta las reglas vigentes en las fuentes oficiales de tu país.</li></ol>
+      <h2 id="a01-fuentes">Fuentes consultadas</h2>
+      <ol class="fuentes"><li>Organización Internacional del Trabajo (OIT). Convenio sobre la seguridad social (norma mínima), 1952 (núm. 102). Base de datos NORMLEX.</li><li>Holzmann, R. y Hinz, R. (2005). <em>Old-Age Income Support in the 21st Century: An International Perspective on Pension Systems and Reform</em>. Banco Mundial.</li><li>Banco Mundial (1994). <em>Averting the Old Age Crisis: Policies to Protect the Old and Promote Growth</em>.</li><li>Chile. Decreto Ley 3.500 de 1980, que establece el nuevo sistema de pensiones. Biblioteca del Congreso Nacional de Chile.</li><li>OCDE, BID y Banco Mundial (2014). <em>Panorama de las pensiones: América Latina y el Caribe</em>.</li></ol>
+      <p class="exc-corta">ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+    </div>
+  </div>
+</div>
+<nav class="mas" aria-label="Más artículos"><div class="wrap"><span class="etq">Sigue leyendo</span><ul><li><a href="#tasa-de-reemplazo"><span>02</span>La tasa de reemplazo, explicada</a></li><li><a href="#empezar-pronto"><span>03</span>Empezar a los 25 o a los 35</a></li><li><a href="#planes-de-empleo-y-privados"><span>04</span>Planes de empleo y voluntarios</a></li><li><a href="#lagunas-previsionales"><span>05</span>Lagunas previsionales</a></li><li><a href="#cuanto-necesitaras"><span>06</span>Cuánto necesitarás: cuatro pasos</a></li></ul></div></nav>
+</article>
+</section>
+<section class="vista" id="tasa-de-reemplazo" aria-label="La tasa de reemplazo, explicada">
+<article>
+<header class="art-cab">
+  <div class="wrap g12">
+    <div class="art-cab__bloque" aria-hidden="true"><span class="n">02</span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica abstracta para el artículo 02"><title>Composición geométrica abstracta para el artículo 02</title><rect x="40" y="40" width="320" height="320" fill="#F4F1EA"/><rect x="40" y="168" width="320" height="192" fill="#141414"/><circle cx="300" cy="100" r="44" fill="#D2381C"/></svg></div>
+    <div class="art-cab__txt">
+      <span class="etq">Conceptos clave · Artículo 02 de 06</span>
+      <h1>La tasa de reemplazo: la cifra que resume cómo será tu jubilación</h1>
+      <p class="art-cab__dek">Qué parte de tu ingreso actual sustituirá tu pensión es la pregunta que más importa, y también la que menos personas saben responder.</p>
+      <p class="art-cab__meta"><span>Carácter educativo e informativo</span><span>Actualizado: 3 de noviembre de 2026</span><span>Lectura: 3 min</span><span>Por ganadros</span></p>
+    </div>
+  </div>
+</header>
+<div class="art-cuerpo">
+  <div class="wrap g12">
+    <nav class="indice" aria-label="Índice del artículo"><span class="etq">En este artículo</span><ol><li><a href="#a02-tema">El tema central</a></li><li><a href="#a02-contexto">Contexto y origen</a></li><li><a href="#a02-referencia">¿Contra qué ingreso se compara?</a></li><li><a href="#a02-sabias">¿Sabías que…?</a></li><li><a href="#a02-aplicacion">Aplicación práctica</a></li><li><a href="#a02-fuentes">Fuentes consultadas</a></li></ol></nav>
+    <div class="prosa">
+      <p class="aviso-edu"><strong>Contenido educativo e informativo.</strong> Este artículo explica conceptos generales y no constituye asesoramiento financiero. Las cifras de los ejemplos están expresadas en base 100 o en porcentajes, son hipotéticas y no representan ningún producto ni garantizan resultados.</p>
+      <h2 id="a02-tema">El tema central</h2><p>La <strong>tasa de reemplazo</strong> es la proporción de tus ingresos laborales que representa tu pensión. Si tu último ingreso era 100 y tu pensión es 60, tu tasa de reemplazo es del 60 %. Es una medida sencilla, pero resume mucho: indica cuánto tendrás que ajustar tu nivel de vida, o cuánto ahorro adicional necesitarás, al dejar de trabajar.</p>
+<p>Conviene distinguir dos versiones. La tasa <strong>bruta</strong> compara la pensión con el ingreso antes de impuestos y aportes. La tasa <strong>neta</strong> compara lo que efectivamente llega a tu bolsillo en ambos momentos, y suele ser más útil para planificar, porque al jubilarte normalmente dejas de pagar aportes previsionales.</p><h2 id="a02-contexto">Contexto y origen</h2><p>La tasa de reemplazo es una de las métricas centrales en las comparaciones internacionales. La OCDE la publica de forma periódica en su informe <em>Pensions at a Glance</em>, donde calcula tasas «teóricas»: lo que recibiría una persona que trabaja y aporta durante toda su carrera con las reglas vigentes de cada país.</p>
+<p>Esas estimaciones muestran diferencias muy amplias entre países, y también advierten algo importante: una carrera laboral con interrupciones, ingresos irregulares o periodos sin aporte puede dar como resultado una tasa real bastante menor que la teórica.</p><h2 id="a02-referencia">¿Contra qué ingreso se compara?</h2><p>No es lo mismo comparar la pensión con el último salario que con el promedio de toda la vida laboral. Si tus ingresos crecieron con los años, la tasa respecto del último salario será más baja que respecto del promedio. Cuando leas una cifra de tasa de reemplazo, busca siempre cuál es la base de comparación.</p>
+      <h2 id="a02-sabias">¿Sabías que…?</h2>
+      <div class="sabias"><span class="etq">Dato central</span><p>Dos personas con la misma pensión pueden tener tasas de reemplazo muy distintas: todo depende del ingreso con el que se compare. Por eso la cifra solo tiene sentido si sabes <strong>de qué ingreso</strong> se está hablando.</p></div>
+      <h2 id="a02-aplicacion">Aplicación práctica</h2>
+      <p>Haz un cálculo propio en base 100, sin necesidad de conocer cifras exactas:</p>
+<ol><li>Toma tu ingreso neto mensual actual y llámalo 100.</li>
+<li>Busca en el simulador o estado de cuenta oficial de tu sistema una estimación de tu pensión y exprésala en esa misma escala (por ejemplo, 45).</li>
+<li>La diferencia (en el ejemplo, 55) es la brecha que tendrías que cubrir con ahorro propio, otros ingresos o ajustes de gasto.</li></ol>
+<p>Repite el ejercicio una vez al año: la estimación cambia a medida que sumas años de aporte.</p>
+      <h2 id="a02-fuentes">Fuentes consultadas</h2>
+      <ol class="fuentes"><li>OCDE. <em>Pensions at a Glance</em> (publicación periódica, ediciones bienales). OECD Publishing.</li><li>OCDE, BID y Banco Mundial (2014). <em>Panorama de las pensiones: América Latina y el Caribe</em>.</li><li>Organización Internacional del Trabajo (OIT). <em>Informe Mundial sobre la Protección Social</em> (ediciones 2020-2022 y 2024-2026).</li></ol>
+      <p class="exc-corta">ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+    </div>
+  </div>
+</div>
+<nav class="mas" aria-label="Más artículos"><div class="wrap"><span class="etq">Sigue leyendo</span><ul><li><a href="#reparto-o-capitalizacion"><span>01</span>Reparto o capitalización: los dos grandes modelos</a></li><li><a href="#empezar-pronto"><span>03</span>Empezar a los 25 o a los 35</a></li><li><a href="#planes-de-empleo-y-privados"><span>04</span>Planes de empleo y voluntarios</a></li><li><a href="#lagunas-previsionales"><span>05</span>Lagunas previsionales</a></li><li><a href="#cuanto-necesitaras"><span>06</span>Cuánto necesitarás: cuatro pasos</a></li></ul></div></nav>
+</article>
+</section>
+<section class="vista" id="empezar-pronto" aria-label="Empezar a los 25 o a los 35">
+<article>
+<header class="art-cab">
+  <div class="wrap g12">
+    <div class="art-cab__bloque" aria-hidden="true"><span class="n">03</span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica abstracta para el artículo 03"><title>Composición geométrica abstracta para el artículo 03</title><circle cx="60" cy="340" r="24" fill="#F4F1EA"/><circle cx="130" cy="300" r="40" fill="#F4F1EA"/><circle cx="220" cy="240" r="62" fill="#141414"/><circle cx="320" cy="140" r="78" fill="#F4F1EA"/></svg></div>
+    <div class="art-cab__txt">
+      <span class="etq">Interés compuesto · Artículo 03 de 06</span>
+      <h1>Empezar a los 25 o a los 35: lo que cambia una década de interés compuesto</h1>
+      <p class="art-cab__dek">Un ejercicio en base 100 muestra por qué el tiempo es el aporte más valioso que puedes hacer a tu jubilación.</p>
+      <p class="art-cab__meta"><span>Carácter educativo e informativo</span><span>Actualizado: 3 de noviembre de 2026</span><span>Lectura: 3 min</span><span>Por ganadros</span></p>
+    </div>
+  </div>
+</header>
+<div class="art-cuerpo">
+  <div class="wrap g12">
+    <nav class="indice" aria-label="Índice del artículo"><span class="etq">En este artículo</span><ol><li><a href="#a03-tema">El tema central</a></li><li><a href="#a03-contexto">Contexto y origen</a></li><li><a href="#a03-regla72">La regla del 72</a></li><li><a href="#a03-sabias">¿Sabías que…?</a></li><li><a href="#a03-aplicacion">Aplicación práctica</a></li><li><a href="#a03-fuentes">Fuentes consultadas</a></li></ol></nav>
+    <div class="prosa">
+      <p class="aviso-edu"><strong>Contenido educativo e informativo.</strong> Este artículo explica conceptos generales y no constituye asesoramiento financiero. Las cifras de los ejemplos están expresadas en base 100 o en porcentajes, son hipotéticas y no representan ningún producto ni garantizan resultados.</p>
+      <h2 id="a03-tema">El tema central</h2><p>El <strong>interés compuesto</strong> consiste en que los rendimientos de tu ahorro generan, a su vez, nuevos rendimientos. Con el paso de los años, ese efecto acumulado puede pesar tanto como los propios aportes. Por eso, en el ahorro para la jubilación, empezar pronto suele importar más que aportar mucho.</p>
+<p>Veamos un ejemplo <strong>hipotético</strong>. Supongamos que una persona aporta 100 unidades al año y que su ahorro obtiene un rendimiento real constante del 4 % anual. No es una previsión ni una promesa: es solo una tasa redonda para ilustrar el mecanismo.</p>
+<div class="tabla-scroll"><table>
+<caption>Ejemplo hipotético: 100 unidades al año a un 4 % anual hasta los 65 años</caption>
+<thead><tr><th>Empieza a los</th><th class="num">Años aportando</th><th class="num">Total aportado</th><th class="num">Saldo a los 65</th></tr></thead>
+<tbody><tr><td>25 años</td><td class="num">40</td><td class="num">4000</td><td class="num">≈ 9503</td></tr>
+<tr><td>35 años</td><td class="num">30</td><td class="num">3000</td><td class="num">≈ 5608</td></tr></tbody>
+</table></div>
+<p>Quien empieza a los 25 aporta solo 1000 unidades más, pero termina con unas 3895 unidades más. La diferencia no viene de aportar más, sino de dar más tiempo a que los rendimientos se acumulen.</p><h2 id="a03-contexto">Contexto y origen</h2><p>El interés compuesto se conoce y se calcula desde hace siglos; ya en el siglo XVII se publicaban tablas impresas para calcularlo. Hoy, organismos de educación financiera como la Comisión de Bolsa y Valores de Estados Unidos (SEC) ofrecen calculadoras públicas para que cualquier persona pueda hacer este tipo de ejercicios con sus propias cifras.</p>
+<p>En la práctica, los rendimientos reales no son constantes: hay años buenos, años malos y años con pérdidas. El ejemplo sirve para entender la lógica, no para predecir un resultado.</p><h2 id="a03-regla72">La regla del 72</h2><p>Una aproximación útil: si divides 72 entre una tasa anual, obtienes de forma aproximada los años que tarda una cantidad en duplicarse. A un 4 %, unos 18 años. La misma regla funciona en contra con la inflación: con un 3 % anual, el poder de compra de tu dinero se reduce a la mitad en unos 24 años (en base 100, quedaría en torno a 49).</p>
+      <h2 id="a03-sabias">¿Sabías que…?</h2>
+      <div class="sabias"><span class="etq">Dato central</span><p>Sin añadir un solo aporte más, 100 unidades a un rendimiento hipotético del 4 % anual se convierten en unas 267 al cabo de 25 años. Más de la mitad del resultado final serían rendimientos, no dinero aportado.</p></div>
+      <h2 id="a03-aplicacion">Aplicación práctica</h2>
+      <p>No necesitas grandes cantidades para aprovechar el tiempo:</p>
+<ul><li>Si aún no aportas a ningún sistema, infórmate de cómo hacerlo como trabajador dependiente o independiente.</li>
+<li>Si ya aportas, comprueba que tus aportes se registran correctamente: un año perdido al inicio cuesta más que uno al final.</li>
+<li>Si empiezas tarde, no te desanimes: cada año adicional de ahorro sigue sumando.</li></ul>
+      <h2 id="a03-fuentes">Fuentes consultadas</h2>
+      <ol class="fuentes"><li>U.S. Securities and Exchange Commission. Investor.gov, «Compound Interest Calculator».</li><li>OCDE/INFE. Materiales y encuestas de educación financiera de la Red Internacional de Educación Financiera.</li><li>OCDE. <em>Pensions at a Glance</em> (publicación periódica). OECD Publishing.</li></ol>
+      <p class="exc-corta">ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+    </div>
+  </div>
+</div>
+<nav class="mas" aria-label="Más artículos"><div class="wrap"><span class="etq">Sigue leyendo</span><ul><li><a href="#reparto-o-capitalizacion"><span>01</span>Reparto o capitalización: los dos grandes modelos</a></li><li><a href="#tasa-de-reemplazo"><span>02</span>La tasa de reemplazo, explicada</a></li><li><a href="#planes-de-empleo-y-privados"><span>04</span>Planes de empleo y voluntarios</a></li><li><a href="#lagunas-previsionales"><span>05</span>Lagunas previsionales</a></li><li><a href="#cuanto-necesitaras"><span>06</span>Cuánto necesitarás: cuatro pasos</a></li></ul></div></nav>
+</article>
+</section>
+<section class="vista" id="planes-de-empleo-y-privados" aria-label="Planes de empleo y voluntarios">
+<article>
+<header class="art-cab">
+  <div class="wrap g12">
+    <div class="art-cab__bloque" aria-hidden="true"><span class="n">04</span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica abstracta para el artículo 04"><title>Composición geométrica abstracta para el artículo 04</title><rect x="60" y="220" width="140" height="140" fill="#141414"/><rect x="200" y="220" width="140" height="140" fill="#F4F1EA"/><rect x="130" y="80" width="140" height="140" fill="#B3AB9E"/><polygon points="200,20 260,80 140,80" fill="#141414"/></svg></div>
+    <div class="art-cab__txt">
+      <span class="etq">Ahorro complementario · Artículo 04 de 06</span>
+      <h1>Planes de empleo y planes privados voluntarios: qué preguntar antes de sumarte</h1>
+      <p class="art-cab__dek">Además del sistema obligatorio, existen planes que ofrecen algunos empleadores y productos de ahorro voluntario. Antes de elegir, hay preguntas que conviene hacer.</p>
+      <p class="art-cab__meta"><span>Carácter educativo e informativo</span><span>Actualizado: 3 de noviembre de 2026</span><span>Lectura: 3 min</span><span>Por ganadros</span></p>
+    </div>
+  </div>
+</header>
+<div class="art-cuerpo">
+  <div class="wrap g12">
+    <nav class="indice" aria-label="Índice del artículo"><span class="etq">En este artículo</span><ol><li><a href="#a04-tema">El tema central</a></li><li><a href="#a04-contexto">Contexto y origen</a></li><li><a href="#a04-comisiones">Por qué las comisiones importan tanto</a></li><li><a href="#a04-sabias">¿Sabías que…?</a></li><li><a href="#a04-aplicacion">Aplicación práctica</a></li><li><a href="#a04-fuentes">Fuentes consultadas</a></li></ol></nav>
+    <div class="prosa">
+      <p class="aviso-edu"><strong>Contenido educativo e informativo.</strong> Este artículo explica conceptos generales y no constituye asesoramiento financiero. Las cifras de los ejemplos están expresadas en base 100 o en porcentajes, son hipotéticas y no representan ningún producto ni garantizan resultados.</p>
+      <h2 id="a04-tema">El tema central</h2><p>Un <strong>plan de empleo</strong> es un esquema de ahorro para la jubilación que una empresa ofrece a sus trabajadores, en el que con frecuencia el empleador también realiza aportes. Un <strong>plan privado voluntario</strong> es un producto que una persona contrata por su cuenta con una entidad financiera autorizada, al margen de su empleo.</p>
+<p>Ambos pueden complementar la pensión del sistema obligatorio, pero sus condiciones varían mucho de un país y de un producto a otro. No hay una opción mejor para todos: depende de tu horizonte, de tu necesidad de liquidez y de los costes.</p><h2 id="a04-contexto">Contexto y origen</h2><p>Los planes ocupacionales tienen una larga tradición en países como Estados Unidos, Reino Unido o los Países Bajos, donde forman parte central del ingreso de muchas personas jubiladas. En América Latina su peso es, en general, menor, aunque varios países han creado incentivos para el ahorro previsional voluntario.</p>
+<p>La OCDE publica unos <em>Principios básicos de regulación de las pensiones privadas</em> que insisten en dos ideas: la transparencia de costes y la protección de los derechos de los participantes.</p><h2 id="a04-comisiones">Por qué las comisiones importan tanto</h2><p>Una comisión que parece pequeña puede tener un efecto grande a largo plazo, porque se descuenta año tras año sobre un saldo que crece. En un ejemplo <strong>hipotético</strong>, 100 unidades invertidas durante 30 años a un 5 % anual llegan a unas 432. Si una comisión anual de un punto reduce el rendimiento neto al 4 %, el resultado queda en unas 324: alrededor de un 25 % menos.</p>
+      <h2 id="a04-sabias">¿Sabías que…?</h2>
+      <div class="sabias"><span class="etq">Dato central</span><p>En muchos planes de empleo existe un <strong>periodo de consolidación</strong>: los aportes del empleador solo pasan a ser plenamente tuyos tras cierto tiempo en la empresa. Si cambias de trabajo antes, podrías perder parte de ellos.</p></div>
+      <h2 id="a04-aplicacion">Aplicación práctica</h2>
+      <p>Antes de sumarte a un plan, pide por escrito la respuesta a estas preguntas:</p>
+<ol><li>¿Qué comisiones cobra y sobre qué se calculan (saldo, aportes, rentabilidad)?</li>
+<li>¿El empleador aporta? ¿En qué proporción y con qué periodo de consolidación?</li>
+<li>¿Puedo retirar el dinero antes de jubilarme? ¿Con qué penalización?</li>
+<li>¿Qué ocurre con el plan si cambio de empleo?</li>
+<li>¿La entidad está autorizada y supervisada por el regulador de mi país?</li>
+<li>¿Qué tratamiento fiscal tiene en mi país? Consulta a un asesor registrado si tienes dudas.</li></ol>
+      <h2 id="a04-fuentes">Fuentes consultadas</h2>
+      <ol class="fuentes"><li>OCDE (2016). <em>OECD Core Principles of Private Pension Regulation</em>.</li><li>OCDE. <em>Pension Markets in Focus</em> (publicación anual).</li><li>OCDE. <em>Pensions at a Glance</em> (publicación periódica). OECD Publishing.</li></ol>
+      <p class="exc-corta">ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+    </div>
+  </div>
+</div>
+<nav class="mas" aria-label="Más artículos"><div class="wrap"><span class="etq">Sigue leyendo</span><ul><li><a href="#reparto-o-capitalizacion"><span>01</span>Reparto o capitalización: los dos grandes modelos</a></li><li><a href="#tasa-de-reemplazo"><span>02</span>La tasa de reemplazo, explicada</a></li><li><a href="#empezar-pronto"><span>03</span>Empezar a los 25 o a los 35</a></li><li><a href="#lagunas-previsionales"><span>05</span>Lagunas previsionales</a></li><li><a href="#cuanto-necesitaras"><span>06</span>Cuánto necesitarás: cuatro pasos</a></li></ul></div></nav>
+</article>
+</section>
+<section class="vista" id="lagunas-previsionales" aria-label="Lagunas previsionales">
+<article>
+<header class="art-cab">
+  <div class="wrap g12">
+    <div class="art-cab__bloque" aria-hidden="true"><span class="n">05</span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica abstracta para el artículo 05"><title>Composición geométrica abstracta para el artículo 05</title><rect x="30" y="60" width="40" height="300" fill="#141414"/><rect x="90" y="60" width="40" height="300" fill="#141414"/><rect x="150" y="60" width="40" height="300" fill="#F4F1EA" opacity=".35"/><rect x="210" y="60" width="40" height="300" fill="#F4F1EA" opacity=".35"/><rect x="270" y="60" width="40" height="300" fill="#141414"/><rect x="330" y="60" width="40" height="300" fill="#141414"/></svg></div>
+    <div class="art-cab__txt">
+      <span class="etq">Carreras laborales reales · Artículo 05 de 06</span>
+      <h1>Lagunas previsionales: por qué los años sin aportar pesan tanto</h1>
+      <p class="art-cab__dek">Desempleo, trabajo informal, cuidado de familiares: los periodos sin aporte son frecuentes y su efecto sobre la pensión es mayor de lo que parece.</p>
+      <p class="art-cab__meta"><span>Carácter educativo e informativo</span><span>Actualizado: 3 de noviembre de 2026</span><span>Lectura: 3 min</span><span>Por ganadros</span></p>
+    </div>
+  </div>
+</header>
+<div class="art-cuerpo">
+  <div class="wrap g12">
+    <nav class="indice" aria-label="Índice del artículo"><span class="etq">En este artículo</span><ol><li><a href="#a05-tema">El tema central</a></li><li><a href="#a05-contexto">Contexto y origen</a></li><li><a href="#a05-sabias">¿Sabías que…?</a></li><li><a href="#a05-aplicacion">Aplicación práctica</a></li><li><a href="#a05-fuentes">Fuentes consultadas</a></li></ol></nav>
+    <div class="prosa">
+      <p class="aviso-edu"><strong>Contenido educativo e informativo.</strong> Este artículo explica conceptos generales y no constituye asesoramiento financiero. Las cifras de los ejemplos están expresadas en base 100 o en porcentajes, son hipotéticas y no representan ningún producto ni garantizan resultados.</p>
+      <h2 id="a05-tema">El tema central</h2><p>Una <strong>laguna previsional</strong> es un periodo en el que no se realizaron aportes al sistema de pensiones. En los sistemas de reparto, las lagunas pueden impedir que se alcance el mínimo de años exigido para acceder a una pensión, o reducir su monto. En los de capitalización, significan menos dinero en la cuenta y, sobre todo, menos tiempo para que ese dinero genere rendimientos.</p>
+<p>Un ejemplo <strong>hipotético</strong> con aportes de 100 unidades al año, a un 4 % anual, durante una vida laboral de 40 años:</p>
+<div class="tabla-scroll"><table>
+<caption>Ejemplo hipotético: efecto de 10 años sin aportes según el momento</caption>
+<thead><tr><th>Escenario</th><th class="num">Años con aporte</th><th class="num">Saldo final</th></tr></thead>
+<tbody><tr><td>Sin lagunas</td><td class="num">40</td><td class="num">≈ 9503</td></tr>
+<tr><td>Laguna en los últimos 10 años</td><td class="num">30</td><td class="num">≈ 8302</td></tr>
+<tr><td>Laguna en los primeros 10 años</td><td class="num">30</td><td class="num">≈ 5608</td></tr></tbody>
+</table></div>
+<p>Con el mismo número de años aportados, la laguna al inicio de la carrera tiene un efecto mucho mayor, porque esos primeros aportes eran los que más tiempo tenían para crecer.</p><h2 id="a05-contexto">Contexto y origen</h2><p>Las lagunas están muy ligadas a la informalidad laboral. La Organización Internacional del Trabajo ha documentado que en buena parte de América Latina una proporción importante del empleo es informal, lo que significa trabajo sin cotización a la seguridad social. La CEPAL también analiza de forma recurrente las brechas de cobertura previsional en su <em>Panorama Social de América Latina y el Caribe</em>.</p>
+<p>Las interrupciones por cuidado de hijos u otros familiares afectan con más frecuencia a las mujeres, lo que contribuye a las brechas de género en las pensiones que señalan diversos organismos internacionales.</p>
+      <h2 id="a05-sabias">¿Sabías que…?</h2>
+      <div class="sabias"><span class="etq">Dato central</span><p>En muchos sistemas, quienes trabajan de forma independiente pueden aportar de manera voluntaria. Es una de las formas más directas de reducir las lagunas cuando no se tiene un empleo formal.</p></div>
+      <h2 id="a05-aplicacion">Aplicación práctica</h2>
+      <ol><li>Pide tu historial de aportes o estado de cuenta en el canal oficial de tu sistema.</li>
+<li>Marca en una línea de tiempo los periodos sin aporte.</li>
+<li>Infórmate de si tu sistema permite aportes voluntarios o como independiente para cubrir periodos futuros.</li>
+<li>Si detectas aportes que tu empleador descontó pero no aparecen registrados, consulta en los canales oficiales cómo reclamarlos.</li></ol>
+      <h2 id="a05-fuentes">Fuentes consultadas</h2>
+      <ol class="fuentes"><li>Organización Internacional del Trabajo (OIT) (2018). <em>Women and Men in the Informal Economy: A Statistical Picture</em> (3.ª ed.).</li><li>Organización Internacional del Trabajo (OIT). <em>Informe Mundial sobre la Protección Social</em> (ediciones 2020-2022 y 2024-2026).</li><li>CEPAL. <em>Panorama Social de América Latina y el Caribe</em> (publicación anual).</li></ol>
+      <p class="exc-corta">ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+    </div>
+  </div>
+</div>
+<nav class="mas" aria-label="Más artículos"><div class="wrap"><span class="etq">Sigue leyendo</span><ul><li><a href="#reparto-o-capitalizacion"><span>01</span>Reparto o capitalización: los dos grandes modelos</a></li><li><a href="#tasa-de-reemplazo"><span>02</span>La tasa de reemplazo, explicada</a></li><li><a href="#empezar-pronto"><span>03</span>Empezar a los 25 o a los 35</a></li><li><a href="#planes-de-empleo-y-privados"><span>04</span>Planes de empleo y voluntarios</a></li><li><a href="#cuanto-necesitaras"><span>06</span>Cuánto necesitarás: cuatro pasos</a></li></ul></div></nav>
+</article>
+</section>
+<section class="vista" id="cuanto-necesitaras" aria-label="Cuánto necesitarás: cuatro pasos">
+<article>
+<header class="art-cab">
+  <div class="wrap g12">
+    <div class="art-cab__bloque" aria-hidden="true"><span class="n">06</span><svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica abstracta para el artículo 06"><title>Composición geométrica abstracta para el artículo 06</title><polygon points="40,360 360,360 200,60" fill="#F4F1EA"/><circle cx="200" cy="260" r="70" fill="#141414"/><rect x="300" y="40" width="60" height="60" fill="#141414"/></svg></div>
+    <div class="art-cab__txt">
+      <span class="etq">Planificación · Artículo 06 de 06</span>
+      <h1>Cuánto necesitarás para jubilarte: un método en cuatro pasos sin cifras mágicas</h1>
+      <p class="art-cab__dek">No existe un número universal. Sí existe una forma ordenada de estimar el tuyo a partir de tus gastos, tu pensión probable y los años que podría durar tu jubilación.</p>
+      <p class="art-cab__meta"><span>Carácter educativo e informativo</span><span>Actualizado: 3 de noviembre de 2026</span><span>Lectura: 3 min</span><span>Por ganadros</span></p>
+    </div>
+  </div>
+</header>
+<div class="art-cuerpo">
+  <div class="wrap g12">
+    <nav class="indice" aria-label="Índice del artículo"><span class="etq">En este artículo</span><ol><li><a href="#a06-tema">El tema central</a></li><li><a href="#a06-metodo">El método en cuatro pasos</a></li><li><a href="#a06-contexto">Contexto y origen</a></li><li><a href="#a06-sabias">¿Sabías que…?</a></li><li><a href="#a06-aplicacion">Aplicación práctica</a></li><li><a href="#a06-fuentes">Fuentes consultadas</a></li></ol></nav>
+    <div class="prosa">
+      <p class="aviso-edu"><strong>Contenido educativo e informativo.</strong> Este artículo explica conceptos generales y no constituye asesoramiento financiero. Las cifras de los ejemplos están expresadas en base 100 o en porcentajes, son hipotéticas y no representan ningún producto ni garantizan resultados.</p>
+      <h2 id="a06-tema">El tema central</h2><p>Es habitual encontrar reglas del tipo «necesitas tantas veces tu salario». Pueden servir como punto de conversación, pero ninguna sustituye un cálculo hecho con tus propios datos. La cantidad que necesitarás depende de cuánto gastas, de qué ingresos tendrás garantizados, de cuántos años puede durar tu jubilación y de cómo evolucionen los precios.</p><h2 id="a06-metodo">El método en cuatro pasos</h2><h3>1. Tu gasto esencial, en base 100</h3>
+<p>Suma lo que gastas al mes en vivienda, alimentación, salud, servicios y transporte. Ese total es tu 100.</p>
+<h3>2. Ajusta lo que cambiará</h3>
+<p>Algunos gastos tienden a bajar al jubilarse (transporte al trabajo, ropa de oficina) y otros suelen subir (salud, cuidados). Ajusta tu base: quizá 100 se convierta en 90 o en 110. No hay una respuesta correcta: es tu estimación.</p>
+<h3>3. Resta tus ingresos previsibles</h3>
+<p>Expresa en la misma escala tu pensión estimada según el simulador o estado de cuenta oficial de tu sistema, y cualquier otro ingreso seguro. Si tu gasto ajustado es 100 y tu pensión estimada es 60, tu brecha es 40 por mes.</p>
+<h3>4. Multiplica por el tiempo</h3>
+<p>Esa brecha mensual tendrá que cubrirse durante todos los años de jubilación. Para tener una referencia de cuántos años pueden ser, consulta las estimaciones de esperanza de vida a los 60 o 65 años que publica Naciones Unidas o el instituto de estadística de tu país, y recuerda que se trata de promedios.</p><h2 id="a06-contexto">Contexto y origen</h2><p>La esperanza de vida ha aumentado en las últimas décadas en la mayoría de los países, según las estimaciones de la División de Población de Naciones Unidas. Es una buena noticia, pero tiene una consecuencia financiera: el ahorro tiene que durar más años que en generaciones anteriores. A eso se suma la inflación, que reduce el poder de compra de cualquier pensión que no se actualice.</p>
+      <h2 id="a06-sabias">¿Sabías que…?</h2>
+      <div class="sabias"><span class="etq">Dato central</span><p>Retrasar unos años la jubilación actúa por partida doble: sumas más años de aporte y reduces los años que tu ahorro tiene que cubrir. Por eso suele ser una de las palancas con más efecto, cuando la salud y el empleo lo permiten.</p></div>
+      <h2 id="a06-aplicacion">Aplicación práctica</h2>
+      <p>Escribe el resultado en una sola hoja: gasto esencial ajustado, pensión estimada, brecha mensual y una acción concreta para este año (aportar de forma voluntaria, revisar comisiones, cubrir una laguna). Si vas a tomar decisiones de inversión concretas, consulta a un asesor financiero debidamente registrado en tu país.</p>
+      <h2 id="a06-fuentes">Fuentes consultadas</h2>
+      <ol class="fuentes"><li>Naciones Unidas, Departamento de Asuntos Económicos y Sociales, División de Población. <em>World Population Prospects</em> (revisión más reciente).</li><li>OCDE. <em>Pensions at a Glance</em> (publicación periódica). OECD Publishing.</li><li>Organización Internacional del Trabajo (OIT). <em>Informe Mundial sobre la Protección Social</em> (ediciones 2020-2022 y 2024-2026).</li></ol>
+      <p class="exc-corta">ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+    </div>
+  </div>
+</div>
+<nav class="mas" aria-label="Más artículos"><div class="wrap"><span class="etq">Sigue leyendo</span><ul><li><a href="#reparto-o-capitalizacion"><span>01</span>Reparto o capitalización: los dos grandes modelos</a></li><li><a href="#tasa-de-reemplazo"><span>02</span>La tasa de reemplazo, explicada</a></li><li><a href="#empezar-pronto"><span>03</span>Empezar a los 25 o a los 35</a></li><li><a href="#planes-de-empleo-y-privados"><span>04</span>Planes de empleo y voluntarios</a></li><li><a href="#lagunas-previsionales"><span>05</span>Lagunas previsionales</a></li></ul></div></nav>
+</article>
+</section>
+</main>
+<footer class="pie">
+  <div class="wrap g12">
+    <div class="pie__exc" role="note" aria-label="Exención de responsabilidad">
+      <p><strong>Exención general.</strong> ganadros es un blog independiente de educación financiera. No es un banco, una administradora de fondos de pensiones, una aseguradora ni un sitio oficial de ninguna entidad pública o privada, y no presta servicios financieros ni terapéuticos. ganadros no tiene afiliación, vínculo comercial ni representación oficial con ninguna marca. Contenido con fines educativos e informativos.</p>
+      <p>El contenido de este sitio es informativo y no constituye asesoramiento psicológico, médico ni financiero. Si atraviesas un malestar emocional importante, consulta a un profesional de la salud.</p>
+    </div>
+    <div class="pie__marca">
+      <span class="marca__nom">ganadros</span>
+      <p>Blog independiente · Educación financiera y bienestar. Pensiones y jubilación explicadas con datos verificables.</p>
+    </div>
+    <div class="pie__datos">
+      <span class="etq">Titularidad y contacto</span>
+      <dl>
+        <div><dt>Titular</dt><dd>HORACIO BURBANO GARCIA</dd></div>
+        <div><dt>Dirección</dt><dd>Av. de la Cultura 808, Santa Anita 15011, Perú</dd></div>
+        <div><dt>Teléfono</dt><dd><a href="tel:+5115182800">+51 1 5182800</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:soporte@ganadros.blog">soporte@ganadros.blog</a></dd></div>
+        <div><dt>Dominio</dt><dd>ganadros.blog</dd></div>
+      </dl>
+    </div>
+    <nav class="pie__leg" aria-label="Páginas legales e institucionales">
+      <span class="etq">Información</span>
+      <ul><li><a href="#acerca-de">Acerca de nosotros</a></li><li><a href="#politica-editorial">Política editorial</a></li><li><a href="#politica-de-privacidad">Política de privacidad</a></li><li><a href="#politica-de-cookies">Política de cookies</a></li><li><a href="#aviso-legal">Aviso legal</a></li></ul>
+    </nav>
+    <div class="pie__fin">
+      <span>© 2026 HORACIO BURBANO GARCIA · ganadros.blog</span>
+      <span>Contenido educativo e informativo. Sin formularios ni captación de datos.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
